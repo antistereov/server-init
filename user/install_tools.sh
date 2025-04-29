@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+export GIT_NAME=""
+export GIT_EMAIL=""
+
 # Colors
 GREEN="\033[0;32m"
 RED="\033[0;31m"
@@ -24,10 +27,6 @@ error() {
     echo -e "${RED}[ERROR]${NC} $1"
     exit 1
 }
-
-# Set your git credentials
-export GIT_NAME=""
-export GIT_EMAIL=""
 
 # Validate input
 if [ -z "$GIT_NAME" ] || [ -z "$GIT_EMAIL" ]; then
