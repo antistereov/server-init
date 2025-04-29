@@ -68,10 +68,14 @@ systemctl start sshd
 
 ######################## CREATE ADMIN ACCOUNT ##########################
 
-info "Creating admin account $USERNAME..."
-adduser "$USERNAME"
-usermod -aG sudo $USERNAME
-success "Admin account created."
+if id "$USERNAME" &>/dev/null; then
+  info "User $USERNAME already exists."
+else
+  info "Creating admin account $USERNAME..."
+  adduser "$USERNAME"
+  usermod -aG sudo "$USERNAME"
+  success "Admin account created."
+fi
 
 info "Authorizing known SSH keys for $USERNAME..."
 mkdir /home/$USERNAME/.ssh
