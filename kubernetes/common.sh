@@ -18,7 +18,7 @@ export CRICTL_VERSION=v1.32.0
 
 # Install dependencies
 
-sudo apt install -y software-properties-common gpg curl apt-transport-https ca-certificates
+sudo apt install -y software-properties-common gpg curl apt-transport-https ca-certificates jq
 
 ############################ ENABLE BRIDGED TRAFFIC ##############################
 
@@ -29,8 +29,8 @@ overlay
 br_netfilter
 EOF
 
-modprobe overlay
-modprobe br_netfilter
+sudo modprobe overlay
+sudo modprobe br_netfilter
 
 # sysctl params required by setup, params persist across reboots
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
@@ -43,9 +43,6 @@ EOF
 sudo sysctl --system
 
 ############################## INSTALL CRI-O ###################################
-
-sudo apt update
-sudo apt install -y software-properties-common curl
 
 # Add the cri-o repository
 
@@ -84,6 +81,7 @@ echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 
 # Update and install the packages
 
+sudo apt update
 sudo apt install -y kubelet kubeadm kubectl
 
 # Start kubelet
