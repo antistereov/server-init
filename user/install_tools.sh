@@ -40,7 +40,7 @@ if command -v brew >/dev/null 2>&1; then
 else
     info "Installing Homebrew..."
 
-    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
     echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> ~/.bash_profile
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
