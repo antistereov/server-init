@@ -44,7 +44,7 @@ cp "$SSHD_CONFIG_FILE" "${SSHD_CONFIG_FILE}.bak"
 
 info "Changing SSH Port to $SSH_PORT"
 if grep -q "^#\?Port " "$SSHD_CONFIG_FILE"; then
-    sudo sed -i "s/^#\?Port .*/Port $SSH_PORT/" "SSHD_CONFIG_FILE"
+    sudo sed -i "s/^#\?Port .*/Port $SSH_PORT/" "$SSHD_CONFIG_FILE"
 else
     echo "Port $SSH_PORT" | sudo tee -a "$SSHD_CONFIG_FILE"
 fi
@@ -54,7 +54,7 @@ success "SSH port changed to $SSH_PORT."
 
 info "Disabling password authentication in SSH..."
 if grep -q "^#\?PasswordAuthentication " "$SSHD_CONFIG_FILE"; then
-    sudo sed -i "s/^#\?PasswordAuthentication .*/PasswordAuthentication no/" "SSHD_CONFIG_FILE"
+    sudo sed -i "s/^#\?PasswordAuthentication .*/PasswordAuthentication no/" "$SSHD_CONFIG_FILE"
 else
     echo "PasswordAuthentication $SSH_PORT" | sudo tee -a "$SSHD_CONFIG_FILE"
 fi
