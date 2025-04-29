@@ -63,8 +63,7 @@ success "Password authentication disabled."
 # Restart SSH
 
 info "Restarting daemon..."
-systemctl enable sshd
-systemctl start sshd
+systemctl restart ssh
 
 ######################## CREATE ADMIN ACCOUNT ##########################
 
