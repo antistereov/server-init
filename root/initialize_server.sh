@@ -63,13 +63,14 @@ success "Password authentication disabled."
 # Restart SSH
 
 info "Restarting daemon..."
-sudo systemctl restart sshd
+systemctl enable sshd
+systemctl start sshd
 
 ######################## CREATE ADMIN ACCOUNT ##########################
 
 info "Creating admin account $USERNAME..."
 adduser "$USERNAME"
-usermod -aG $USERNAME
+usermod -aG sudo $USERNAME
 success "Admin account created."
 
 info "Authorizing known SSH keys for $USERNAME..."
