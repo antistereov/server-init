@@ -2,7 +2,6 @@
 set -euo pipefail
 
 export USERNAME=""
-export PASSWORD=""
 export SSH_PORT=2222
 export SSHD_CONFIG_FILE="/etc/ssh/sshd_config"
 
@@ -30,8 +29,8 @@ error() {
     exit 1
 }
 
-if [ -z "$USERNAME" ] || [ -z "$PASSWORD" ]; then
-    error "Error: USERNAME or PASSWORD is not set"
+if [ -z "$USERNAME" ] ; then
+    error "Error: USERNAME is not set"
 fi
 
 ######################## CHANGE SSH CONFIG #############################
@@ -69,9 +68,8 @@ sudo systemctl restart sshd
 ######################## CREATE ADMIN ACCOUNT ##########################
 
 info "Creating admin account $USERNAME..."
-useradd -m "$USERNAME"
-
-echo "$USERNAME:$PASSWORD" | sudo chpasswd
+adduser "$USERNAME"
+usermod -aG $USERNAME
 success "Admin account created."
 
 info "Authorizing known SSH keys for $USERNAME..."
