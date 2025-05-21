@@ -11,3 +11,15 @@ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 kubectl get po -n kube-system
+
+# Make the control plane available for scheduling
+
+kubectl taint nodes $NODENAME node-role.kubernetes.io/control-plane-
+
+# Instsall Calico Network Plugin for Pod Networking
+
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+
+# Setup Kubernetes Metrics Server
+
+kubectl apply -f https://raw.githubusercontent.com/techiescamp/kubeadm-scripts/main/manifests/metrics-server.yaml
