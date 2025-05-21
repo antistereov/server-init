@@ -23,3 +23,8 @@ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 # Setup Kubernetes Metrics Server
 
 kubectl apply -f https://raw.githubusercontent.com/techiescamp/kubeadm-scripts/main/manifests/metrics-server.yaml
+
+# Setup MetalLB
+
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.13.12/config/manifests/metallb-native.yaml
+
