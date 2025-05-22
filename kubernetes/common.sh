@@ -18,6 +18,7 @@ export CRICTL_VERSION=v1.32.0
 
 # Install dependencies
 
+sudo apt update
 sudo apt install -y software-properties-common gpg curl apt-transport-https ca-certificates jq
 
 ############################ ENABLE BRIDGED TRAFFIC ##############################
@@ -100,4 +101,8 @@ export LOCAL_IP="$(ip --json addr show eth0 | jq -r '.[0].addr_info[] | select(.
 cat > /etc/default/kubelet << EOF
 KUBELET_EXTRA_ARGS=--node-ip=$LOCAL_IP
 EOF
+
+# Install other required software
+
+sudo apt install -y cifs-utils
 
